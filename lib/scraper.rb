@@ -19,10 +19,13 @@ class Scraper
   end
 
   def self.scrape_profile_page(profile_url) #returns a HASH, k/v's are student attributes.
-    student_info = {}
+    student_hash = {}
     html = Nokogiri::HTML(open(profile_url))
 
-    html.css("") #.text? .value?
+    html.css("").collect {|student|
+
+
+    }
   end
 
 end
