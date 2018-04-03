@@ -22,10 +22,21 @@ class Scraper
     student_hash = {}
     html = Nokogiri::HTML(open(profile_url))
     #grab :linkid, :github, :blog, :profile_quote, and :bio
-    html.css("").collect {|student|
-
-
+    html.css(".social-icon-container a").each {|student|
+      href = student.attribute("href").value #baseline to compare against
+      if href.include?("linkedin")
+        student_hash[:linkedin] = href
+      elsif href.include?("github")
+        student_hash[:github] = href
+      else
+        student_hash[:blog] = href
+      end
     }
+    student_hash[:profile_quote] = html.css(".profile-quote").text #standalone
+    student_hash[:bio] = html.css(".description-holder p").text
+
+    student_hash #return once filled
+
   end
 
 end
