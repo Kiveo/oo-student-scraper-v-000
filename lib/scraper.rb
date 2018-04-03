@@ -21,7 +21,7 @@ class Scraper
   def self.scrape_profile_page(profile_url) #returns a HASH, k/v's are student attributes.
     student_hash = {}
     html = Nokogiri::HTML(open(profile_url))
-
+    #grab :linkid, :github, :blog, :profile_quote, and :bio
     html.css("").collect {|student|
 
 
